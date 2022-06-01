@@ -1,0 +1,60 @@
+1. Problem 1.6 (page 25)
+
+   One of the biggest problems that I see with new-if is that it
+behaves like a procedure. new-if does not behave like the original if
+because the original if would look to see that guess? works, and if
+guess? does not work, then the alternative would be evaluated, which
+is improve guess.
+   The way I see it, this is what the result of new-if will be. The
+parameter guess and x will be evaluated, but in the end new-if will
+never stop (sqtr-iter (improve guess x) x))) from running. So even if
+the guess is correct, new-if does not stop improve guess from being
+evaluated by the program. Inside the body of improve guess there is
+another sqtr-iter procedure. This means that there will be a never
+ending recursion here due to the fact that new-if will not stop
+improve guess from running. So to conclude, new-if will result in a
+recursion call that never ends. 
+
+
+2. Problem 1.12 (page 42)
+
+(define (p r e)
+  (cond ((= e 0) 1)
+        ((= r e) 1)
+	(else (+ p(- r 1) e)
+	      (p (- r 1) (- e 1)))))) 
+
+   The first condition was easy come up with. From an image of
+Pascal's triangle that I saw, it is apparent that the first column,
+usually denoted as 0, would always be 1. I interpret column 0 as the
+leftmost part of Pascals triangle and, from just looking at a picture
+of Pascals triangle, one could deduce that the leftmost element,
+0, would be 1 in all cases after the first row. 
+   The second condition involves knowing that the combination of two numbers
+would result in one. I remember that from discrete math.
+   The else statement took me more thinking but I guessed at first that
+the most important part was to get the sum of the two numbers above
+the number that I at in the Pascal triangle. The result of (p 3 2)
+will come from adding the two numbers above (p 3 2), in the pascal
+triangle which are, in a pseudo-code manner:
+(p (- 3 2) 2) + (p (- 3 1) (- 2 1))
+   The first pseudo-code p looks to the number above the number
+and the second pseudo-code p looks at second number above of
+the number where you are at in the pascal triangle. It fallows the
+logic that the number you have is the sum of the numbers above it.
+I implemented the code properly in the else statement in my solution
+above. 
+
+Short Essay
+
+   This assignment gave me more perspective as to how certain known
+procedures, or functions in other languages, can be written in scheme
+as well. Recursion in scheme bahaves the same way as in other
+languages. The big difference I notice in scheme is that you have to
+be more careful with the syntax, as a misplaced a parentheis somewhere
+can ruin the code that you've written. I feel like the cond makes things
+easier for me and else also makes it easier for me to handle many
+conditional problems that I would have in another program languages.
+I feel like in c programming I would've needed more lines of code to
+finish the second problem. I feel like cond is one of the unique
+features of scheme that I wish I could see in other programming languages. 
